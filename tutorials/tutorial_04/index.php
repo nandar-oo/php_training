@@ -9,10 +9,23 @@
 </head>
 <body>
   <div class="card">
-    <h1>Login</h1>
+    <h1 class="login">Login</h1>
+    <?php 
+      if (isset($_GET["fail"])){
+        echo "<small style='color:red;'>*Invalid email or password!</small>";
+      }
+    ?>
     <form action="home.php" method="post">
-      Name : <input type="text" name="name" id="name" required><br>
-      Password : <input type="password" name="password" id="password" required><br>
+      <table>
+        <tr>
+          <td>Email</td>
+          <td><input type="email" name="email" id="email" required></td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td><input type="password" name="password" id="password" required></td>
+        </tr>
+      </table>         
       <input type="submit" value="Login">
     </form>
   </div>

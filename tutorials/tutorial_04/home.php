@@ -12,12 +12,20 @@
 <body>
   <?php
   session_start();
-  $_SESSION["name"] = $_POST["name"];
-  $_SESSION["password"] = $_POST["password"];
+  $email=$_POST["email"];
+  $password=$_POST["password"];
+  $_SESSION["email"] =$email; 
+  $_SESSION["password"] = $password;
   ?>
   <div class="card">
-    <h1>Welcome <?php echo $_POST["name"]; ?></h1>
-    <a href="logout.php"><button>Logout</button></a>
+    <?php if ($email === "user@gmail.com" && $password==="123456"): ?>
+      <h1>Welcome User</h1>
+      <a href="logout.php"><button>Logout</button></a>
+    <?php 
+      else:
+        header('location:index.php?fail=1');
+      endif
+    ?>      
   </div>
 
 </body>
