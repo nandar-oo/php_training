@@ -1,0 +1,37 @@
+.container {
+  width: 750px;
+  margin: 50px auto;
+  font-family: 'Courier New';
+}
+
+h2 {
+  margin-top: 50px;
+  font-size: 30px;
+}
+
+table {
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+tr:hover {
+  background-color: #ddd8d8;
+}
+
+th {
+  background-color: #696969;
+  color: #fff;
+}
+
+th,
+td {
+  width: 25%;
+  height: 30px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+th {
+  height: 50px;
+}
