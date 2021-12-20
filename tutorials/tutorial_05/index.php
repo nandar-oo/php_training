@@ -1,6 +1,5 @@
 <?php
 require 'vendor/autoload.php';
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
 ?>
 <!DOCTYPE html>
 <html lang="en">
