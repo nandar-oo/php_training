@@ -23,7 +23,7 @@
     <h1>QR Code Generator</h1>
     <form action="qrcode.php" method="post">
       <label>Enter your data :</label>
-      <input type="text" name="userInput" id="userInput" value="<?= $userInput; ?>"><br>
+      <input type="text" name="userInput" id="userInput" value="<?= $userInput; ?>" required><br>
       <input type="submit" value="Generate" name="generate">
     </form>
     <?php 
