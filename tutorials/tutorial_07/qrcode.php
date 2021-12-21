@@ -3,7 +3,7 @@ include('libraries/phpqrcode/qrlib.php');
 
 $userInput = filter_var($_POST["userInput"], FILTER_SANITIZE_STRING);
 session_start();
-$_SESSION["userInput"]=$userInput;
+$_SESSION["userInput"] = $userInput;
 ob_start("callback");
 $codeText = $userInput;
 $debugLog = ob_get_contents();

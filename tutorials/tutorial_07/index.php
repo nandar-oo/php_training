@@ -12,10 +12,10 @@
 
 <body>
   <?php
-  $userInput="";
+  $userInput = "";
   session_start();
-  if(isset($_SESSION["userInput"])){
-    $userInput=$_SESSION["userInput"];
+  if (isset($_SESSION["userInput"])) {
+    $userInput = $_SESSION["userInput"];
     session_unset();
   }
   ?>
@@ -26,11 +26,11 @@
       <input type="text" name="userInput" id="userInput" value="<?= $userInput; ?>" required><br>
       <input type="submit" value="Generate" name="generate">
     </form>
-    <?php 
-    if(isset($_GET["status"])){
+    <?php
+    if (isset($_GET["status"])) {
       echo '<img src="tutoqr.png" />';
     }
-  ?>
+    ?>
   </div>
 </body>
 
