@@ -16,6 +16,7 @@
   session_start();
   if(isset($_SESSION["userInput"])){
     $userInput=$_SESSION["userInput"];
+    session_unset();
   }
   ?>
   <div class="card">
