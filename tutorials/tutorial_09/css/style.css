@@ -1,0 +1,22 @@
+body{
+  font-family: 'Courier New';
+  text-align: center;
+}
+#container{
+  width: 900px;
+  margin:50px auto;
+}
+
+#container2{
+  width: 400px;
+  margin:50px auto;
+}
+
+h1{
+  font-size: 30px;
+  margin:10px auto;
+}
+
+p{
+  margin:10px auto;
+}
