@@ -34,14 +34,22 @@ echo "<script>var data2=" . json_encode($data2) . ";</script>";
 </head>
 
 <body>
+  <?php
+    session_start();
+    $status = $_SESSION["login_status"];
+    if (!$status){
+      header('location:../tutorial_10/index.php');
+    }
+  ?>
   <div id="container">
+    <a href="../tutorial_08/index.php" class="btn">Back</a>
     <h1>Age of Students</h1>
     <canvas id="graphCanvas"></canvas>
   </div>
   <div id="container2">
     <h1>Number of Students By Age</h1>
     <canvas id="graphCanvas2"></canvas>
-    <p>The pie chart shows number of students grouped by age</p>
+    <p>The pie chart shows number of students grouped by age</p><br>
   </div>
 </body>
 

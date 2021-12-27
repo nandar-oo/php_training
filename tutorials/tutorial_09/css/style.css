@@ -1,6 +1,5 @@
 body{
   font-family: 'Courier New';
-  text-align: center;
 }
 #container{
   width: 900px;
@@ -15,8 +14,23 @@ body{
 h1{
   font-size: 30px;
   margin:10px auto;
+  text-align: center;
 }
 
 p{
   margin:10px auto;
 }
+
+.btn {
+  display: inline-block;
+  margin: 10px 20px;
+  padding: 15px 30px;
+  border: none;
+  color: #fff;
+  font-family: 'Courier New';
+  border-radius: 20px;
+  font-size: 13px;
+  background-color: #09853d;
+  text-decoration: none;
+}
+
