@@ -18,9 +18,16 @@ require_once 'config.php';
   <div class="container">
     <div class="header clearfix">
       <h1>Student List</h1>
-      <a href="add.php">Add New Student</a>
+      <a href="../tutorial_10/logout.php" class="logout">Logout</a>
+      <a href="../tutorial_09/index.php" class="chart">Show Chart</a>
+      <a href="add.php" class="new">Add New Student</a>
     </div>
     <?php
+    session_start();
+    $status=$_SESSION["login_status"];
+    if(!$status){
+      header("location:../tutorial_10/index.php");
+    }
     $sql = "select * from students;";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) :

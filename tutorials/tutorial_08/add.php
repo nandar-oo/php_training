@@ -13,6 +13,11 @@
 <body>
   <?php
   require_once 'config.php';
+  session_start();
+  $status = $_SESSION['login_status'];
+  if (!$status) {
+    header('location:../tutorial_10/index.php');
+  }
   $major_err = "";
   $name = "";
   $age = null;

@@ -11,14 +11,28 @@
 .header h1 {
   float: left;
   font-size: 24px;
+  padding-top: 10px;
 }
 
 .header a {
   float: right;
   padding: 10px 20px;
-  background-color: #09853d;
+  
   color: #fff;
   text-decoration: none;
+  margin:10px;
+}
+
+.new{
+  background-color: #09853d;
+}
+
+.logout{
+  background-color: #696969;
+}
+
+.chart{
+  background-color: #297ae6;
 }
 
 .clearfix::before,

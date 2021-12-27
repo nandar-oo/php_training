@@ -12,9 +12,16 @@
 
 <body>
   <?php
+
+  use PhpOffice\PhpWord\Writer\HTML\Part\Head;
+
   require_once 'config.php';
-  $major_err = "";
   session_start();
+  $status = $_SESSION['login_status'];
+  if (!$status) {
+    header('location:../tutorial_10/index.php');
+  }
+  $major_err = "";
   if (isset($_GET["id"])) {
     $id = $_GET["id"];
     $_SESSION["id"] = $id;
@@ -24,7 +31,7 @@
     $name = $row["student_name"];
     $age = $row["age"];
     $email = $row["email"];
-    $phone ="0". $row["phone_number"];
+    $phone = "0" . $row["phone_number"];
     $major = $row["major"];
   }
 
@@ -38,14 +45,14 @@
     if ($major == "0") {
       $major_err = "*Please choose major!";
     } else {
-      $stmt=$conn->prepare("UPDATE students SET student_name=?,age=?,email=?,phone_number=?,major=? WHERE id=?;");
-      $stmt->bind_param("sisisi", $n, $a, $e,$p,$m,$i);
-      $n=$name;
-      $a=$age;
-      $e=$email;
-      $p=$phone;
-      $m=$major;
-      $i=$id;
+      $stmt = $conn->prepare("UPDATE students SET student_name=?,age=?,email=?,phone_number=?,major=? WHERE id=?;");
+      $stmt->bind_param("sisisi", $n, $a, $e, $p, $m, $i);
+      $n = $name;
+      $a = $age;
+      $e = $email;
+      $p = $phone;
+      $m = $major;
+      $i = $id;
       $stmt->execute();
       header("location:index.php");
     }
@@ -65,7 +72,7 @@
         <option value="1">CS</option>
         <option value="2">CT</option>
       </select>';
-      } elseif ($major=="1") {
+      } elseif ($major == "1") {
         echo '<select name="major" id="major">
         <option value="0">Choose major</option>
         <option value="1" selected>CS</option>

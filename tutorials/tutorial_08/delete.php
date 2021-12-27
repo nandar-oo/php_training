@@ -13,8 +13,12 @@
 <body>
   <?php
   require_once 'config.php';
-  $major_err = "";
   session_start();
+  $status = $_SESSION['login_status'];
+  if (!$status) {
+    header('location:../tutorial_10/index.php');
+  }
+  $major_err = "";
   if (isset($_GET["id"])) {
     $id = $_GET["id"];
     $_SESSION["id"] = $id;
