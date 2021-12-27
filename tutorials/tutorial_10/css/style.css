@@ -1,0 +1,48 @@
+.card {
+  width: 500px;
+  margin: 50px auto;
+  padding: 50px;
+  background-color: #b2e7e9;
+  font-family: 'Courier New';
+  text-align: center;
+  border-radius: 5px;
+}
+
+.card h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+input[type=email],
+input[type=password] {
+  width: 60%;
+  margin: 10px 0px;
+  padding: 10px 15px;
+  border: 1px solid #979797;
+  background-color: #e8f0fe;
+  text-align: center;
+  border-radius: 20px;
+}  
+
+input[type=submit],
+.btn {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #0b8f94;
+  color: #fff;
+  font-family: 'Courier New';
+  font-size: 13px;
+  border-radius: 20px;
+}
+
+.btn{
+  display: inline-block;
+  background-color: #979797;
+  text-decoration: none;
+}
+
+.error{
+  color:#ff0000;
+  font-size: 13px;
+}
