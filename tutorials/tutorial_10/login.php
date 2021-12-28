@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION["password"])) {
   $password = $_SESSION["password"];
 }
-$email = "nandaroo279230@gmail.com"; //default user
+$email = "scm.kyimyatnoesoe@gmail.com"; //default user
 
 $user_email = $_POST["email"];
 $user_password = $_POST["password"];

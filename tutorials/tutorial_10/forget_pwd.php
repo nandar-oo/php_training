@@ -21,8 +21,8 @@
   $msg = $invalid_email = "";
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_email = $_POST['email'];
-    if ($user_email == "nandaroo279230@gmail.com") { //default user
-      $mail = new PHPMailer();
+    if ($user_email == "scm.kyimyatnoesoe@gmail.com") { //default user
+
 
       $mail = new PHPMailer();  // create a new object
       $mail->IsSMTP(); // enable SMTP
@@ -34,11 +34,11 @@
       $mail->Port = 587;
 
       /* Log in with Sender email and password */
-      $mail->Username = "sender@gmail.com";;
-      $mail->Password = "senderpassword";
+      $mail->Username = "nandaroo279230@gmail.com";;
+      $mail->Password = "279ndo230";
 
       /* Set the mail sender. */
-      $mail->setFrom("sender@gmail.com", "Sender");
+      $mail->setFrom("nandaroo279230@gmail.com", "Sender");
 
       /* Add a recipient. */
       $mail->addAddress($user_email);
