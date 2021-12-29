@@ -1,8 +1,7 @@
 <?php
-
-use App\Models\Task;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Task\TaskController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,26 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $tasks = Task::orderBy('created_at', 'asc')->get();
+Route::get('/',[TaskController::class,'showTaskList']);
+Route::post('/task', [TaskController::class,'createTask']);
 
-    return view('tasks', [
-        'tasks' => $tasks
-    ]);
-});
-Route::post('/task', function (Request $request) {
-    $validated = $request->validate([
-        'name' => 'required|max:255',
-    ]);
-    $task = new Task;
-    $task->name = $request->name;
-    $task->save();
-
-    return redirect('/')->with(['success' => "The task is added successfully."]);
-});
-
-Route::get('/task/delete/{id}', function ($id) {
-    $task = Task::find($id);
-    $task->delete();
-    return back();
-});
+Route::get('/task/delete/{id}',[TaskController::class,'deleteTaskById']);
