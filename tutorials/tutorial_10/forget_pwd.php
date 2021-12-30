@@ -23,7 +23,6 @@
     $user_email = $_POST['email'];
     if ($user_email == "user@gmail.com") { //default user
 
-
       $mail = new PHPMailer();  // create a new object
       $mail->IsSMTP(); // enable SMTP
 

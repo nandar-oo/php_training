@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Task\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[TaskController::class,'showTaskList']);
-Route::post('/task', [TaskController::class,'createTask']);
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login#post');
+Route::get('/register', [AuthController::class, 'registerationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register#post');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/task/delete/{id}',[TaskController::class,'deleteTaskById']);
+Route::middleware('auth')->group(function () {
+    Route::get('/', [TaskController::class, 'showTaskList'])->name('taskList');
+    Route::post('/task', [TaskController::class, 'createTask']);
+
+    Route::get('/task/delete/{id}', [TaskController::class, 'deleteTaskById']);
+});

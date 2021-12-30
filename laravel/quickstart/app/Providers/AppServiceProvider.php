@@ -16,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Contracts\Dao\Task\TaskDaoInterface', 'App\Dao\Task\TaskDao');
 
         $this->app->bind('App\Contracts\Services\Task\TaskServiceInterface', 'App\Services\Task\TaskService');
+
+        $this->app->bind('App\Contracts\Dao\User\UserDaoInterface', 'App\Dao\User\UserDao');
+
+        $this->app->bind('App\Contracts\Services\User\UserServiceInterface', 'App\Services\User\UserService');
     }
 
     /**
