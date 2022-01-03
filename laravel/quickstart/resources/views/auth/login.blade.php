@@ -14,7 +14,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         @endif
-                        <form action="#" method="POST">
+                        <form action="{{ route('login.post') }}" method="POST">
                             @csrf
                             <div class="form-group row mb-2">
                                 <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
@@ -45,6 +45,16 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-group row mb-2">
+                              <div class="col-md-6 offset-md-4">
+                                  <div class="checkbox">
+                                      <label>
+                                          <a href="{{ route('forget.password.get') }}">Reset Password</a>
+                                      </label>
+                                  </div>
+                              </div>
+                          </div>
 
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

@@ -27,6 +27,9 @@
                     </li>
                     @else
                     <li class="nav-item">
+                        <p class="text-primary m-2 ">{{ Auth::user()->name }}</p>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                     </li>
                     @endguest
@@ -38,7 +41,6 @@
     <div class="container mt-5">
         @yield('content')
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

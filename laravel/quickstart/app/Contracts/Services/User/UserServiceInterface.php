@@ -29,5 +29,19 @@ interface UserServiceInterface
      * @return
      */
     public function logout();
+
+    /**
+     * To send reset url via mail
+     * @param Request $request request inputs
+     * @return
+     */
+    public function sendMail(Request $request);
+
+    /**
+     * To reset password
+     * @param Request $request inputs request
+     * @return success or not message
+     */
+    public function resetPassword(Request $request);
 }
 

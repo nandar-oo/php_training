@@ -29,4 +29,25 @@ interface UserDaoInterface
      * @return
      */
     public function logout();
+
+    /**
+     *To reset user password
+     * @param Request $request
+     * @return message success or not
+     */
+    public function updatePassword($request);
+
+    /**
+     *To create new record in password_resets table
+     * @param $token, $email
+     * @return
+     */
+    public function insertToken($token,$email);
+
+     /**
+     *To get token
+     * @param  $email
+     * @return Object password_resets
+     */
+    public function getToken($email);
 }
