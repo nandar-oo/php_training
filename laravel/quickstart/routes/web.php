@@ -32,6 +32,5 @@ Route::post('/reset-password',[AuthController::class,'submitResetPasswordForm'])
 Route::middleware('auth')->group(function () {
     Route::get('/', [TaskController::class, 'showTaskList'])->name('taskList');
     Route::post('/task', [TaskController::class, 'createTask']);
-
     Route::get('/task/delete/{id}', [TaskController::class, 'deleteTaskById']);
 });
