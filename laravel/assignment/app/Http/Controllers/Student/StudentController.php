@@ -62,4 +62,21 @@ class StudentController extends Controller
         return redirect()->route('studentList')->with(['deleteMessage'=>'The student record is deleted successfully!']);
     }
 
+    public function export()
+    {
+        return $this->studentService->export();
+    }
+
+    public function showImportForm(){
+        return view('import');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file'=>'required',
+        ]);
+        $this->studentService->import($request);
+        return redirect()->route('studentList');
+    }
 }

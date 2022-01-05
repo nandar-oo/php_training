@@ -47,4 +47,18 @@ interface StudentServicesInterface
      * @return
      */
     public function deleteStudentById($id);
+
+    /**
+     * To export student table to csv file
+     * @param
+     * @return
+     */
+    public function export();
+
+    /**
+     * To import csv to student table
+     * @param Request $request (csv file)
+     * @return
+     */
+    public function import(Request $request);
 }

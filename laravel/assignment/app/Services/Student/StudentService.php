@@ -2,6 +2,9 @@
 namespace App\Services\Student;
 
 use Illuminate\Http\Request;
+use App\Exports\StudentsExport;
+use App\Imports\StudentsImport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Contracts\Dao\Student\StudentDaoInterface;
 use App\Contracts\Services\Student\StudentServicesInterface;
 
@@ -80,4 +83,25 @@ class StudentService implements StudentServicesInterface
     public function deleteStudentById($id){
         $this->studentDao->deleteStudentById($id);
     }
+
+    /**
+     * To export student table to csv file
+     * @param
+     * @return
+     */
+    public function export()
+    {
+        return Excel::download(new StudentsExport, 'students.csv');
+    }
+
+    /**
+     * To import csv to student table
+     * @param Request $request (csv file)
+     * @return
+     */
+    public function import(Request $request)
+    {
+        Excel::import(new StudentsImport, $request->file('file'));
+    }
+
 }

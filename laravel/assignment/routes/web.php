@@ -25,3 +25,9 @@ Route::get('/student/edit/{id}',[StudentController::class,'showStudentEditForm']
 Route::post('/student/edit/{id}',[StudentController::class,'submitStudentEditForm'])->name('edit.student.post');
 
 Route::get('/student/delete/{id}',[StudentController::class,'deleteStudent'])->name('delete.student');
+
+Route::get('/student/export',[StudentController::class,'export'])->name('student.export');
+
+Route::get('/student/import/',[StudentController::class,'showImportForm'])->name('student.import.get');
+Route::post('/student/import/',[StudentController::class,'import'])->name('student.import.post');
+

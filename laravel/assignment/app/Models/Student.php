@@ -14,4 +14,11 @@ class Student extends Model
     {
         return $this->belongsTo('App\Models\Major');
     }
+
+    protected $fillable=[
+        'name',
+        'email',
+        'major_id',
+        'city',
+    ];
 }
