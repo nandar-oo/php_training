@@ -98,7 +98,7 @@ class StudentService implements StudentServicesInterface
      */
     public function export()
     {
-        return Excel::download(new StudentsExport, 'students.csv');
+        return Excel::download(new StudentsExport($this->studentDao), 'students.csv');
     }
 
     /**
