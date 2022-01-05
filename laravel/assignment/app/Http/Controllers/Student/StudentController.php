@@ -82,6 +82,6 @@ class StudentController extends Controller
             'file' => 'required',
         ]);
         $this->studentService->import($request);
-        return redirect()->route('studentList');
+        return redirect()->route('studentList')->with(['successMessage' => 'The choose file is imported successfully!']);
     }
 }
