@@ -12,7 +12,8 @@ class StudentsExport implements FromCollection
         return Student::all();
     }
 
-    public function headings(): array {
-        return ['id','name','email','major_id','city', 'created_at', 'updated_at',];
+    public function headings(): array
+    {
+        return ['id', 'name', 'email', 'major_id', 'city', 'created_at', 'updated_at',];
     }
 }

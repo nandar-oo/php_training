@@ -39,7 +39,7 @@ interface StudentServicesInterface
      * @param $id,Request $request
      * @return
      */
-    public function editStudentById(Request $request,$id);
+    public function editStudentById(Request $request, $id);
 
     /**
      * To delete student by id

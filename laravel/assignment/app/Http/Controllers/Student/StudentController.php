@@ -15,9 +15,10 @@ class StudentController extends Controller
         $this->studentService = $studentServiceInterface;
     }
 
-    public function showStudentList(){
-        $students=$this->studentService->getAllStudents();
-        return view('studentList')->with(['students'=>$students]);
+    public function showStudentList()
+    {
+        $students = $this->studentService->getAllStudents();
+        return view('studentList')->with(['students' => $students]);
     }
 
     public function showStudentForm()
@@ -29,37 +30,40 @@ class StudentController extends Controller
     public function submitStudentForm(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'email'=>'required|email',
-            'major'=>'required',
-            'city'=>'required'
+            'name' => 'required',
+            'email' => 'required|email',
+            'major' => 'required',
+            'city' => 'required'
         ]);
 
         $this->studentService->addStudent($request);
-        return redirect()->route('studentList')->with(['successMessage'=>'The new student is added successfully!']);
+        return redirect()->route('studentList')->with(['successMessage' => 'The new student is added successfully!']);
     }
 
-    public function showStudentEditForm($id){
+    public function showStudentEditForm($id)
+    {
         $majors = $this->studentService->getMajors();
-        $student=$this->studentService->getStudentById($id);
-        return view('editStudentForm')->with(['student'=>$student,'majors'=>$majors]);
+        $student = $this->studentService->getStudentById($id);
+        return view('editStudentForm')->with(['student' => $student, 'majors' => $majors]);
     }
 
-    public function submitStudentEditForm($id,Request $request){
+    public function submitStudentEditForm($id, Request $request)
+    {
         $request->validate([
-            'name'=>'required',
-            'email'=>'required|email',
-            'major'=>'required',
-            'city'=>'required'
+            'name' => 'required',
+            'email' => 'required|email',
+            'major' => 'required',
+            'city' => 'required'
         ]);
 
-        $this->studentService->editStudentById($request,$id);
-        return redirect()->route('studentList')->with(['successMessage'=>'The student data is updated successfully!']);
+        $this->studentService->editStudentById($request, $id);
+        return redirect()->route('studentList')->with(['successMessage' => 'The student data is updated successfully!']);
     }
 
-    public function deleteStudent($id){
+    public function deleteStudent($id)
+    {
         $this->studentService->deleteStudentById($id);
-        return redirect()->route('studentList')->with(['deleteMessage'=>'The student record is deleted successfully!']);
+        return redirect()->route('studentList')->with(['deleteMessage' => 'The student record is deleted successfully!']);
     }
 
     public function export()
@@ -67,14 +71,15 @@ class StudentController extends Controller
         return $this->studentService->export();
     }
 
-    public function showImportForm(){
+    public function showImportForm()
+    {
         return view('import');
     }
 
     public function import(Request $request)
     {
         $request->validate([
-            'file'=>'required',
+            'file' => 'required',
         ]);
         $this->studentService->import($request);
         return redirect()->route('studentList');
