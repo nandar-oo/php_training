@@ -5,6 +5,7 @@ namespace App\Dao\Student;
 use App\Models\Major;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Contracts\Dao\Student\StudentDaoInterface;
 
 class StudentDao implements StudentDaoInterface
@@ -79,5 +80,40 @@ class StudentDao implements StudentDaoInterface
     public function deleteStudentById($id)
     {
         Student::find($id)->delete();
+    }
+
+    /**
+     * To search students from list
+     * @param Request $request
+     * @return list of students
+     */
+    public function searchStudents(Request $request)
+    {
+        $query = "select students.* , majors.name as major_name from students,majors where students.major_id = majors.id  and ";
+        $name = $request->name;
+        $start = $request->start;
+        $end = $request->end;
+        $sub_query = '';
+        if ($name != '') {
+            $sub_query = " students.name like '%$name%' ";
+        }
+
+        if ($sub_query == '' && $start != '') {
+            $sub_query = " students.created_at >= '$start' ";
+        } elseif ($sub_query != '' && $start != '') {
+            $sub_query .= " and students.created_at >= '$start' ";
+        }
+
+        if ($sub_query == '' && $end != '') {
+            $sub_query = " students.created_at <= '$end' ";
+        } elseif ($sub_query != '' && $end != '') {
+            $sub_query .= " and students.created_at <= '$end' ";
+        }
+
+        $query .= $sub_query;
+
+        return DB::select(
+            DB::raw($query)
+        );
     }
 }

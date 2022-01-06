@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Contracts\Services\Student\StudentServicesInterface;
+use Maatwebsite\Excel\Concerns\ToArray;
 
 class StudentController extends Controller
 {
@@ -83,5 +84,19 @@ class StudentController extends Controller
         ]);
         $this->studentService->import($request);
         return redirect()->route('studentList')->with(['successMessage' => 'The choose file is imported successfully!']);
+    }
+
+    public function showSearchForm()
+    {
+        return view('search');
+    }
+
+    public function submitSearchForm(Request $request)
+    {
+        if ($request->name != '' || $request->start != '' || $request->end != '') {
+            $students = $this->studentService->searchStudents($request);
+            return view('searchList')->with(['students' => $students]);
+        }
+        return back()->with(['nullMessage' => '*Please fill at least one input!']);
     }
 }

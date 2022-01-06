@@ -17,6 +17,7 @@
     <div class="float-end">
         <a href="{{ route('student.export') }}" class="btn btn-outline-primary"><i class="fas fa-download"></i> Export</a>
         <a href="{{ route('student.import.get') }}" class="btn btn-outline-info"><i class="fas fa-file-import"></i> Import</a>
+        <a href="{{ route('search.get') }}" class="btn btn-outline-secondary"><i class="fas fa-search"></i> Search</a>
     </div>
 </div>
 <table class="table table-striped">

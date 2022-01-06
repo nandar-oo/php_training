@@ -44,7 +44,7 @@ interface StudentDaoInterface
      * @param $id,Request $request
      * @return
      */
-    public function editStudentById(Request $request,$id);
+    public function editStudentById(Request $request, $id);
 
     /**
      * To delete student by id
@@ -52,4 +52,11 @@ interface StudentDaoInterface
      * @return
      */
     public function deleteStudentById($id);
+
+    /**
+     * To search students from list
+     * @param Request $request
+     * @return list of students
+     */
+    public function searchStudents(Request $request);
 }
