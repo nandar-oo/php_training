@@ -99,4 +99,22 @@ class StudentController extends Controller
         }
         return back()->with(['nullMessage' => '*Please fill at least one input!']);
     }
+
+    public function index()
+    {
+        return view('API.studentList');
+    }
+
+    public function showStudentFormApi()
+    {
+        $majors = $this->studentService->getMajors();
+        return view('API.addStudent')->with(['majors' => $majors]);
+    }
+
+    public function showEditFormApi($id)
+    {
+        $majors = $this->studentService->getMajors();
+        $student = $this->studentService->getStudentById($id);
+        return view('API.editStudent')->with(['student' => $student, 'majors' => $majors]);
+    }
 }

@@ -116,4 +116,15 @@ class StudentDao implements StudentDaoInterface
             DB::raw($query)
         );
     }
+
+    /**
+     * To get all students and majors data
+     * @return object array
+     */
+    public function getAllStudentsMajors(){
+        $students=Student::join('majors','students.major_id','majors.id')
+                ->select('students.*','majors.name as major_name')
+                ->get();
+        return $students;
+    }
 }

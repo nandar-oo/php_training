@@ -59,4 +59,10 @@ interface StudentDaoInterface
      * @return list of students
      */
     public function searchStudents(Request $request);
+
+    /**
+     * To get all students and majors data
+     * @return object array
+     */
+    public function getAllStudentsMajors();
 }

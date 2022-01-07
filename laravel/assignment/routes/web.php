@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Student\StudentApiController;
 use App\Http\Controllers\Student\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +36,11 @@ Route::post('/student/import/', [StudentController::class, 'import'])->name('stu
 Route::get('/student/search', [StudentController::class, 'showSearchForm'])->name('search.get');
 
 Route::post('/student/search', [StudentController::class, 'submitSearchForm'])->name('search.post');
+
+
+
+Route::group(['prefix'=>'/api-view/'],function (){
+    Route::get('/students',[StudentController::class,'index'])->name('api.studentList');
+    Route::get('students/add',[StudentController::class,'showStudentFormApi'])->name('api.add.student');
+    Route::get('/students/edit/{id}', [StudentController::class, 'showEditFormApi'])->name('api.edit.student');
+});

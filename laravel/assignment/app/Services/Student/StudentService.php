@@ -119,4 +119,12 @@ class StudentService implements StudentServicesInterface
     public function searchStudents(Request $request){
         return $this->studentDao->searchStudents($request);
     }
+
+    /**
+     * To get all students and majors data
+     * @return object array
+     */
+    public function getAllStudentsMajors(){
+        return $this->studentDao->getAllStudentsMajors();
+    }
 }
