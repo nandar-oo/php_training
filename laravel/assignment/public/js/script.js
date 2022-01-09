@@ -46,6 +46,32 @@ function addStudent() {
     });
 }
 
+$(function () {
+    var id = window.location.pathname.split("/")[4];
+    if (id != null) {
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:8000/api/students/" + id,
+            dataType: "json",
+            success: function (result) {
+                var majors = result.majors;
+                var student = result.student;
+                $('#name').val(student.name);
+                $('#email').val(student.email);
+                majors.forEach(item => {
+                    if (item.id == student.major_id) {
+                        $('#major').append(`<option value="${item.id}" selected>${item.name}</option>`);
+                    } else {
+                        $('#major').append(`<option value="${item.id}">${item.name}</option>`);
+                    }
+                });
+                $('#city').val(student.city);
+            },
+        });
+    }
+
+})
+
 function updateStudent(id) {
     var id = $("#student_id").val();
     var student = {
@@ -70,8 +96,9 @@ function updateStudent(id) {
                 $(".message").append(
                     `<div class="alert alert-success alert-dismissible fade show" role="alert">${result.success}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`
                 );
+                window.location.href = "http://127.0.0.1:8000/api-view/students";
             }
-            window.location.href = "http://127.0.0.1:8000/api-view/students";
+
         },
     });
 }

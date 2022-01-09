@@ -24,7 +24,15 @@ class StudentApiController extends Controller
         return response()->json($students);
     }
 
-
+    public function getStudentById($id){
+        $majors = $this->studentService->getMajors();
+        $student = $this->studentService->getStudentById($id);
+        $data=[
+            'student'=>$student,
+            'majors'=>$majors
+        ];
+        return response()->json($data);
+    }
 
     public function createStudent(Request $request)
     {
