@@ -17,7 +17,7 @@
         <ul class="navbar-nav ml-auto d-flex">
           @guest
           <li class="nav-item">
-            <a href="{{ route('login.get') }}" class="nav-link"> Login</a>
+            <a href="{{ route('login') }}" class="nav-link"> Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('register.get') }}">Register</a>

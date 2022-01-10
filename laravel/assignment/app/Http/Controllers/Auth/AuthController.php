@@ -70,11 +70,11 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed',
+            'password' => 'required|same:confirmation',
             'confirmation'=>'required'
         ]);
         $this->userInterface->register($request);
-        return redirect()->route('login.get');
+        return redirect()->route('studentList');
     }
 
     /**

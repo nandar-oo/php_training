@@ -41,7 +41,7 @@
         <div class="col-md-6">
           <input type="password" id="password" class="form-control" name="confirmation" >
           @if ($errors->has('confirmation'))
-          <small class="text-danger">*{{ $errors->first('confirmation') }}</small>
+          <small class="text-danger">*The password confirmation does not match!</small>
           @endif
         </div>
       </div>
