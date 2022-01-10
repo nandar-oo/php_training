@@ -65,4 +65,10 @@ interface StudentDaoInterface
      * @return object array
      */
     public function getAllStudentsMajors();
+
+    /**
+     * To get 10 latest students
+     * @return $students array of student
+     */
+    public function latestStudents();
 }

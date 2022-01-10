@@ -100,6 +100,15 @@ class StudentController extends Controller
         return back()->with(['nullMessage' => '*Please fill at least one input!']);
     }
 
+    public function showMailForm(){
+        return view('sendMail');
+    }
+
+    public function submitMailForm(Request $request){
+        $this->studentService->sendMailLatestStudents($request);
+        return redirect()->route('studentList')->with(['successMessage'=>'*The email has been sent!']);
+    }
+
     public function index()
     {
         return view('API.studentList');

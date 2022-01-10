@@ -5,6 +5,7 @@ namespace App\Services\Student;
 use Illuminate\Http\Request;
 use App\Exports\StudentsExport;
 use App\Imports\StudentsImport;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Contracts\Dao\Student\StudentDaoInterface;
 use App\Contracts\Services\Student\StudentServicesInterface;
@@ -47,6 +48,9 @@ class StudentService implements StudentServicesInterface
     public function addStudent(Request $request)
     {
         $this->studentDao->addStudent($request);
+        Mail::send('newStudentMail', ['student_name'=>$request->name], function ($message) use ($request) {
+            $message->to($request->email, 'New student')->subject('Registration Information');
+        });
     }
 
     /**
@@ -126,5 +130,16 @@ class StudentService implements StudentServicesInterface
      */
     public function getAllStudentsMajors(){
         return $this->studentDao->getAllStudentsMajors();
+    }
+
+    /**
+     * To get 10 latest students
+     * @return $students array of student
+     */
+    public function sendMailLatestStudents(Request $request){
+        $students= $this->studentDao->latestStudents();
+        Mail::send('latestStudents', ['students'=>$students], function ($message) use ($request) {
+            $message->to($request->email, 'Receiver')->subject('Report Latest Students');
+        });
     }
 }

@@ -37,6 +37,8 @@ Route::get('/student/search', [StudentController::class, 'showSearchForm'])->nam
 
 Route::post('/student/search', [StudentController::class, 'submitSearchForm'])->name('search.post');
 
+Route::get('/mail/send',[StudentController::class,'showMailForm'])->name('mail.get');
+Route::post('/mail/send',[StudentController::class,'submitMailForm'])->name('mail.post');
 
 
 Route::group(['prefix'=>'/api-view/'],function (){

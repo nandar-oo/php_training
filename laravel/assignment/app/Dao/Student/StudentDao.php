@@ -121,10 +121,21 @@ class StudentDao implements StudentDaoInterface
      * To get all students and majors data
      * @return object array
      */
-    public function getAllStudentsMajors(){
-        $students=Student::join('majors','students.major_id','majors.id')
-                ->select('students.*','majors.name as major_name')
-                ->get();
+    public function getAllStudentsMajors()
+    {
+        $students = Student::join('majors', 'students.major_id', 'majors.id')
+            ->select('students.*', 'majors.name as major_name')
+            ->get();
+        return $students;
+    }
+
+    /**
+     * To get 10 latest students
+     * @return $students array of student
+     */
+    public function latestStudents()
+    {
+        $students = Student::latest()->take(10)->get();
         return $students;
     }
 }

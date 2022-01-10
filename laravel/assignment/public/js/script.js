@@ -41,6 +41,7 @@ function addStudent() {
                 $(".message").append(
                     `<div class="alert alert-success alert-dismissible fade show" role="alert">${result.success}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`
                 );
+                window.location.href = "http://127.0.0.1:8000/api-view/students";
             }
         },
     });
