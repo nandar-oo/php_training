@@ -39,11 +39,14 @@ class StudentDao implements StudentDaoInterface
     public function addStudent(Request $request)
     {
         $student = new Student;
-        $student->name = $request->name;
-        $student->email = $request->email;
-        $student->major_id = $request->major;
-        $student->city = $request->city;
-        $student->save();
+        DB::transaction(function () use ($request, $student) {
+            $student->name = $request->name;
+            $student->email = $request->email;
+            $student->major_id = $request->major;
+            $student->city = $request->city;
+            $student->save();
+        });
+        return $student;
     }
 
     /**
@@ -63,13 +66,16 @@ class StudentDao implements StudentDaoInterface
      */
     public function editStudentById(Request $request, $id)
     {
-        Student::where('id', $id)
-            ->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'major_id' => $request->major,
-                'city' => $request->city,
-            ]);
+        DB::transaction(function () use ($request, $id) {
+            Student::where('id', $id)
+                ->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'major_id' => $request->major,
+                    'city' => $request->city,
+                ]);
+        });
+        return true;
     }
 
     /**
@@ -79,7 +85,10 @@ class StudentDao implements StudentDaoInterface
      */
     public function deleteStudentById($id)
     {
-        Student::find($id)->delete();
+        DB::transaction(function () use ($id) {
+            Student::find($id)->delete();
+        });
+        return true;
     }
 
     /**

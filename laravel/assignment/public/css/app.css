@@ -10,3 +10,11 @@ nav{
 a{
     color:#fff;
 }
+
+.resource-nav{
+    background-color: #77998c;
+}
+
+.resource-body{
+    background-color: #faf0e6;
+}

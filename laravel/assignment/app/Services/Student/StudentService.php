@@ -47,10 +47,11 @@ class StudentService implements StudentServicesInterface
      */
     public function addStudent(Request $request)
     {
-        $this->studentDao->addStudent($request);
+        $student=$this->studentDao->addStudent($request);
         Mail::send('newStudentMail', ['student_name'=>$request->name], function ($message) use ($request) {
             $message->to($request->email, 'New student')->subject('Registration Information');
         });
+        return $student;
     }
 
     /**
@@ -83,6 +84,7 @@ class StudentService implements StudentServicesInterface
     public function editStudentById(Request $request, $id)
     {
         $this->studentDao->editStudentById($request, $id);
+        return true;
     }
 
     /**
@@ -93,6 +95,7 @@ class StudentService implements StudentServicesInterface
     public function deleteStudentById($id)
     {
         $this->studentDao->deleteStudentById($id);
+        return true;
     }
 
     /**
@@ -113,6 +116,7 @@ class StudentService implements StudentServicesInterface
     public function import(Request $request)
     {
         Excel::import(new StudentsImport, $request->file('file'));
+        return true;
     }
 
     /**
@@ -141,5 +145,6 @@ class StudentService implements StudentServicesInterface
         Mail::send('latestStudents', ['students'=>$students], function ($message) use ($request) {
             $message->to($request->email, 'Receiver')->subject('Report Latest Students');
         });
+        return true;
     }
 }

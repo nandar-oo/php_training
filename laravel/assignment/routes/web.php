@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Student\StudentApiController;
-use App\Http\Controllers\Student\StudentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Student\StudentController;
+use App\Http\Controllers\Student\StudentResourceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,11 +39,26 @@ Route::get('/student/search', [StudentController::class, 'showSearchForm'])->nam
 Route::post('/student/search', [StudentController::class, 'submitSearchForm'])->name('search.post');
 
 Route::get('/mail/send',[StudentController::class,'showMailForm'])->name('mail.get');
+
 Route::post('/mail/send',[StudentController::class,'submitMailForm'])->name('mail.post');
+
+
+
+Route::get('/login',[AuthController::class,'showLoginForm'])->name('login.get');
+
+Route::post('/login',[AuthController::class,'submitLoginForm'])->name('login.post');
+
+Route::get('/register',[AuthController::class,'submitRegisterationForm'])->name('register.get');
+
+Route::post('/register',[AuthController::class,'submitRegisterationForm'])->name('register.post');
+
+Route::resource('/students', StudentResourceController::class);
 
 
 Route::group(['prefix'=>'/api-view/'],function (){
     Route::get('/students',[StudentController::class,'index'])->name('api.studentList');
+
     Route::get('students/add',[StudentController::class,'showStudentFormApi'])->name('api.add.student');
+
     Route::get('/students/edit/{id}', [StudentController::class, 'showEditFormApi'])->name('api.edit.student');
 });

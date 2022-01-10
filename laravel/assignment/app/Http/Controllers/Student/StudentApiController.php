@@ -13,30 +13,51 @@ class StudentApiController extends Controller
 
     private $studentService;
 
+    /**
+     * Class Constructor
+     * @param StudentServicesInterface
+     * @return
+     */
     public function __construct(StudentServicesInterface $studentServiceInterface)
     {
         $this->studentService = $studentServiceInterface;
     }
 
+    /**
+     * To get all student list
+     * @param
+     * @return $students
+     */
     public function showStudentList()
     {
         $students = $this->studentService->getAllStudentsMajors();
         return response()->json($students);
     }
 
-    public function getStudentById($id){
+    /**
+     * To get a student by id
+     * @param $id
+     * @return Object $student
+     */
+    public function getStudentById($id)
+    {
         $majors = $this->studentService->getMajors();
         $student = $this->studentService->getStudentById($id);
-        $data=[
-            'student'=>$student,
-            'majors'=>$majors
+        $data = [
+            'student' => $student,
+            'majors' => $majors
         ];
         return response()->json($data);
     }
 
+    /**
+     * To save new student
+     * @param Request $request
+     * @return massage success or not
+     */
     public function createStudent(Request $request)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'major' => 'required',
@@ -49,9 +70,14 @@ class StudentApiController extends Controller
         return response()->json(["success" => "The new student is added successfully"]);
     }
 
+    /**
+     * To update student information
+     * @param student id, Request $request
+     * @return message success or not
+     */
     public function editStudent($id, Request $request)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'major' => 'required',
@@ -62,14 +88,19 @@ class StudentApiController extends Controller
         }
 
         $this->studentService->editStudentById($request, $id);
-        $data=['success' => 'The student data is updated successfully!'];
+        $data = ['success' => 'The student data is updated successfully!'];
         return response()->json($data);
     }
 
+    /**
+     * To delete student by id
+     * @param student id
+     * @return message success or not
+     */
     public function deleteStudent($id)
     {
         $this->studentService->deleteStudentById($id);
-        $data=['success' => 'The student record is deleted successfully!'];
+        $data = ['success' => 'The student record is deleted successfully!'];
         return response()->json($data);
     }
 }
