@@ -48,14 +48,17 @@ Route::get('/login',[AuthController::class,'showLoginForm'])->name('login.get');
 
 Route::post('/login',[AuthController::class,'submitLoginForm'])->name('login.post');
 
-Route::get('/register',[AuthController::class,'submitRegisterationForm'])->name('register.get');
+Route::get('/register',[AuthController::class,'showRegisterationForm'])->name('register.get');
 
 Route::post('/register',[AuthController::class,'submitRegisterationForm'])->name('register.post');
+
+Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+
 
 Route::resource('/students', StudentResourceController::class);
 
 
-Route::group(['prefix'=>'/api-view/'],function (){
+Route::group(['prefix'=>'/api-view'],function (){
     Route::get('/students',[StudentController::class,'index'])->name('api.studentList');
 
     Route::get('students/add',[StudentController::class,'showStudentFormApi'])->name('api.add.student');
