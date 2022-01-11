@@ -80,4 +80,11 @@ interface StudentServicesInterface
      * @return $students array of student
      */
     public function sendMailLatestStudents(Request $request);
+
+     /**
+     * To generate list of students as pdf
+     * @param
+     * @return
+     */
+    public function generatePDF();
 }

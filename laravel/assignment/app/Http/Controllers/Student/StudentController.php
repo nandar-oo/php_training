@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Models\Student;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Contracts\Services\Student\StudentServicesInterface;
 use Maatwebsite\Excel\Concerns\ToArray;
+use App\Contracts\Services\Student\StudentServicesInterface;
 
 class StudentController extends Controller
 {
@@ -212,5 +214,10 @@ class StudentController extends Controller
         $majors = $this->studentService->getMajors();
         $student = $this->studentService->getStudentById($id);
         return view('API.editStudent')->with(['student' => $student, 'majors' => $majors]);
+    }
+
+    public function generatePDF()
+    {
+        return $this->studentService->generatePDF();
     }
 }

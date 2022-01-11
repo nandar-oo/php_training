@@ -9,7 +9,7 @@
   <style>
     table {
       margin: auto;
-      width: 80%;
+      width: 100%;
       border: 1px solid black;
       border-collapse: collapse;
     }
@@ -33,20 +33,25 @@
 </head>
 
 <body>
+  <h1>Student List</h1>
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Email</th>
         <th>Major</th>
+        <th>City</th>
       </tr>
     </thead>
     <tbody>
       @foreach ($students as $item)
       <tr>
+        <td>{{ $item->id }}</td>
         <td>{{ $item->name }}</td>
         <td>{{ $item->email }}</td>
         <td>{{ $item->major->name }}</td>
+        <td>{{ $item->city }}</td>
       </tr>
       @endforeach
     </tbody>

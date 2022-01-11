@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/student/export', [StudentController::class, 'export'])->name('student.export');
 
+    Route::get('/student/export/pdf', [StudentController::class, 'generatePDF'])->name('student.export.pdf');
+
     Route::get('/student/import/', [StudentController::class, 'showImportForm'])->name('student.import.get');
 
     Route::post('/student/import/', [StudentController::class, 'import'])->name('student.import.post');

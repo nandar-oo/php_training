@@ -47,8 +47,8 @@ class StudentService implements StudentServicesInterface
      */
     public function addStudent(Request $request)
     {
-        $student=$this->studentDao->addStudent($request);
-        Mail::send('newStudentMail', ['student_name'=>$request->name], function ($message) use ($request) {
+        $student = $this->studentDao->addStudent($request);
+        Mail::send('newStudentMail', ['student_name' => $request->name], function ($message) use ($request) {
             $message->to($request->email, 'New student')->subject('Registration Information');
         });
         return $student;
@@ -124,7 +124,8 @@ class StudentService implements StudentServicesInterface
      * @param Request $request
      * @return list of students
      */
-    public function searchStudents(Request $request){
+    public function searchStudents(Request $request)
+    {
         return $this->studentDao->searchStudents($request);
     }
 
@@ -132,7 +133,8 @@ class StudentService implements StudentServicesInterface
      * To get all students and majors data
      * @return object array
      */
-    public function getAllStudentsMajors(){
+    public function getAllStudentsMajors()
+    {
         return $this->studentDao->getAllStudentsMajors();
     }
 
@@ -140,11 +142,25 @@ class StudentService implements StudentServicesInterface
      * To get 10 latest students
      * @return $students array of student
      */
-    public function sendMailLatestStudents(Request $request){
-        $students= $this->studentDao->latestStudents();
-        Mail::send('latestStudents', ['students'=>$students], function ($message) use ($request) {
+    public function sendMailLatestStudents(Request $request)
+    {
+        $students = $this->studentDao->latestStudents();
+        Mail::send('latestStudents', ['students' => $students], function ($message) use ($request) {
             $message->to($request->email, 'Receiver')->subject('Report Latest Students');
         });
         return true;
+    }
+
+    /**
+     * To generate list of students as pdf
+     * @param
+     * @return
+     */
+    public function generatePDF()
+    {
+        $students = $this->studentDao->getAllStudents();
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('studentPdf', ['students' => $students]);
+        return $pdf->download('students.pdf');
     }
 }
