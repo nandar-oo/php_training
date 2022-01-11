@@ -30,9 +30,6 @@
             <a class="nav-link" href="{{ url('/students') }}">Resource</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">{{ Auth::user()->name }}</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}">Logout</a>
           </li>
           @endguest

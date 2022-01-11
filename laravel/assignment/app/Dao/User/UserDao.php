@@ -24,6 +24,53 @@ class UserDao implements UserDaoInterface
             $user->password = Hash::make($request->password);
             $user->save();
         });
+
+        return $user;
+    }
+
+    /**
+     * To save password reset email and token
+     * @param $email, $token
+     * @return true
+     */
+    public function saveResetToken($email, $token)
+    {
+        DB::table('password_resets')
+            ->insert([
+                'email' => $email,
+                'token' => $token
+            ]);
+        return true;
+    }
+
+    /**
+     * To get password reset email and token
+     * @param $email, $token
+     * @return object
+     */
+    public function getToken($email, $token)
+    {
+        $record = DB::table('password_resets')
+            ->where('email', $email)
+            ->where('token', $token)
+            ->get();
+        return $record;
+    }
+
+    /**
+     * To update user password
+     * @param Request $request
+     * @return true
+     */
+    public function resetPassword(Request $request)
+    {
+        $user=User::where('email', $request->email)
+            ->update([
+                'password' => Hash::make($request->password)
+            ]);
+        DB::table('password_resets')
+                ->where('email',$request->email)
+                ->delete();
         return $user;
     }
 }

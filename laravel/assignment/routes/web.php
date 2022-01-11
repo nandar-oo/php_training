@@ -43,10 +43,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/mail/send', [StudentController::class, 'submitMailForm'])->name('mail.post');
 
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
     Route::resource('/students', StudentResourceController::class);
-
 });
-
 
 
 
@@ -58,12 +58,19 @@ Route::get('/register', [AuthController::class, 'showRegisterationForm'])->name(
 
 Route::post('/register', [AuthController::class, 'submitRegisterationForm'])->name('register.post');
 
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::get('/forget-password', [AuthController::class, 'showForgetPasswordForm'])->name('forget.get');
+
+Route::post('/forget-password', [AuthController::class, 'submitForgetPasswordForm'])->name('forget.post');
+
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('reset.get');
+
+Route::post('/reset-password', [AuthController::class, 'submitResetPasswordForm'])->name('reset.post');
 
 
 
-
-Route::group(['prefix' => '/api-view'], function () {
+Route::group(['prefix' => '/api-view', 'middleware' => 'auth'], function () {
     Route::get('/students', [StudentController::class, 'index'])->name('api.studentList');
 
     Route::get('students/add', [StudentController::class, 'showStudentFormApi'])->name('api.add.student');

@@ -42,12 +42,12 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $status=$this->userInterface->login($request);
-        if($status){
+        $status = $this->userInterface->login($request);
+        if ($status) {
             return redirect()->route('studentList');
         }
 
-        return back()->with(['error'=>'Oppes! You have entered invalid credentials']);
+        return back()->with(['error' => 'Oppes! You have entered invalid credentials']);
     }
 
     /**
@@ -71,7 +71,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|same:confirmation',
-            'confirmation'=>'required'
+            'confirmation' => 'required'
         ]);
         $this->userInterface->register($request);
         return redirect()->route('studentList');
@@ -82,10 +82,60 @@ class AuthController extends Controller
      * @param
      * @return
      */
-    public function logout(){
+    public function logout()
+    {
         Session::flush();
         Auth::logout();
+        return redirect()->route('login');
+    }
 
+    /**
+     * To redirect forget-password form
+     * @param
+     * @return
+     */
+    public function showForgetPasswordForm()
+    {
+        return view('Auth.forgetPassword');
+    }
+
+    /**
+     * To send reset password link to user email
+     * @param Request $request
+     * @return message
+     */
+    public function submitForgetPasswordForm(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users'
+        ]);
+        $this->userInterface->sendResetPasswordMail($request);
+        return back()->with(['message' => 'We have e-mailed your password reset link!']);
+    }
+
+    /**
+     * To redirect reset-password form
+     * @param
+     * @return
+     */
+    public function showResetPasswordForm($token)
+    {
+        return view('Auth.resetPassword')->with(['token' => $token]);
+    }
+
+    /**
+     * To reset password
+     * @param Request $request, $token
+     * @return message success or not
+     */
+    public function submitResetPasswordForm(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users',
+            'password' => 'required|same:confirmation',
+            'confirmation' => 'required'
+        ]);
+        $this->userInterface->resetPassword($request);
         return redirect()->route('login');
     }
 }

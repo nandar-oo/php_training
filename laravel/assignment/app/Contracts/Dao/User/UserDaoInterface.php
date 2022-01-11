@@ -16,4 +16,25 @@ interface UserDaoInterface
      * @return
      */
     public function createUser(Request $request);
+
+    /**
+     * To save password reset email and token
+     * @param $email, $token
+     * @return true
+     */
+    public function saveResetToken($email, $token);
+
+    /**
+     * To get password reset email and token
+     * @param $email, $token
+     * @return object
+     */
+    public function getToken($email, $token);
+
+    /**
+     * To update user password
+     * @param Request $request
+     * @return true
+     */
+    public function resetPassword(Request $request);
 }
